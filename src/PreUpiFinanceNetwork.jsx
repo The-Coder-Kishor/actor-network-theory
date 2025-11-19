@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Info, ChevronDown, ChevronUp, Clock, CreditCard, Banknote } from 'lucide-react';
+import { Info, ChevronDown, ChevronUp, Clock, CreditCard, Banknote, Maximize2, Minimize2 } from 'lucide-react';
 
 const PreUpiFinanceNetwork = () => {
   const [selectedActor, setSelectedActor] = useState(null);
   const [hoveredActor, setHoveredActor] = useState(null);
   const [showFlows, setShowFlows] = useState({ authority: true, value: true, data: true });
   const [expandedSection, setExpandedSection] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const actors = {
     human: [
@@ -280,6 +281,10 @@ const PreUpiFinanceNetwork = () => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  };
+
   // Utility function for icon based on ID
   const getActorIcon = (id) => {
     switch(id) {
@@ -292,10 +297,20 @@ const PreUpiFinanceNetwork = () => {
   }
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6 overflow-auto">
-      <div className="max-w-7xl mx-auto">
+    <div className={`${isFullScreen ? 'fixed inset-0 z-50 bg-gradient-to-br from-slate-50 to-slate-100' : 'w-full h-screen bg-gradient-to-br from-slate-50 to-slate-100'} p-6 overflow-auto`}>
+      <div className={`${isFullScreen ? 'max-w-none' : 'max-w-7xl'} mx-auto`}>
         <div className="mb-4">
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Pre-UPI Indian Finance Actor Network (c. 2010-2015)</h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl font-bold text-slate-800">Pre-UPI Indian Finance Actor Network (c. 2010-2015)</h1>
+            <button
+              onClick={toggleFullScreen}
+              className="flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 px-3 py-2 rounded-lg shadow-md transition-colors"
+              title={isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
+            >
+              {isFullScreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
+              <span className="text-sm font-medium">{isFullScreen ? "Exit Full Screen" : "Full Screen"}</span>
+            </button>
+          </div>
           <p className="text-slate-600 mb-3">Sociotechnical Analysis of the Fragmented, Cash-Dominant Era</p>
           
           <div className="flex gap-4 items-center flex-wrap">
