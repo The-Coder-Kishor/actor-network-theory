@@ -1,0 +1,20 @@
+{
+  "name": "actor-network-theory",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Single-page React visualization of the UPI/NPCI actor network, bundled for GitHub Pages.",
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/bundle.js --loader:.js=jsx",
+    "dev": "esbuild src/main.jsx --bundle --outfile=dist/bundle.js --servedir=dist --sourcemap",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "lucide-react": "^0.286.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "rimraf": "^5.0.0"
+  }
+}
