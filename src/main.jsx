@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import ActorNetwork from './ActorNetwork';
-import PreUpiFinanceNetwork from './PreUpiFinanceNetwork';
 
 function App() {
   const [page, setPage] = useState('actor');
@@ -15,16 +14,10 @@ function App() {
         >
           Actor Network
         </button>
-        <button
-          onClick={() => setPage('preupi')}
-          className={`px-3 py-1 rounded ${page === 'preupi' ? 'bg-slate-800 text-white' : 'bg-slate-100'}`}
-        >
-          Pre-UPI Network
-        </button>
       </header>
 
       <main>
-        {page === 'actor' ? <ActorNetwork /> : <PreUpiFinanceNetwork />}
+        {<ActorNetwork />}
       </main>
     </div>
   );

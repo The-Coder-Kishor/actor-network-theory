@@ -8,13 +8,13 @@ const ActorNetwork = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   const actors = {
-    human: [
+    institutions: [
       { 
         id: 'government', 
         name: 'Government', 
         x: 400, 
         y: 40, 
-        color: '#3b82f6',
+        color: '#0ea5e9',
         role: 'Policy Steering & Digital Mandate',
         desc: 'Ultimate policy authority through Digital India initiative, DBT schemes, and FASTag. Functions as "Second-Order Demand Aggregator" by mandating UPI for public benefit distribution.',
         power: 'Co-owns NPCI via RBI, sets strategic vision, guarantees critical early transaction volumes through government schemes',
@@ -26,7 +26,7 @@ const ActorNetwork = () => {
         name: 'RBI & Regulators', 
         x: 200, 
         y: 130, 
-        color: '#3b82f6',
+        color: '#0ea5e9',
         role: 'Licensing, Oversight & Systemic Risk Management',
         desc: 'Core statutory authority under Payment and Settlement Systems Act, 2007. Mandates data localization, security standards (two-factor auth), and ISO 20022 migration.',
         power: 'Issues licenses, nominates NPCI board members, enforces compliance through SAR audits, can penalize non-compliant entities',
@@ -38,7 +38,7 @@ const ActorNetwork = () => {
         name: 'NPCI', 
         x: 400, 
         y: 150, 
-        color: '#8b5cf6',
+        color: '#0ea5e9',
         role: 'Quasi-Regulatory Operator & System Owner',
         desc: 'Section 8 non-profit company (est. 2008) owned by bank consortium. Absolute rule-setting power over UPI platform. Operates switch, prescribes liability matrix, manages settlement.',
         power: 'Gatekeeper function—can delink any participant. Controls protocol evolution. NIPL subsidiary monetizes UPI IP globally while domestic entity remains public utility',
@@ -50,7 +50,7 @@ const ActorNetwork = () => {
         name: 'Banks (PSPs)', 
         x: 250, 
         y: 270, 
-        color: '#3b82f6',
+        color: '#0ea5e9',
         role: 'Payment Service Providers & Delegated Regulators',
         desc: 'Mandatory participants connecting to NPCI switch. Maintain customer accounts, perform KYC/authentication, onboard TPAPs. Major banks (SBI, HDFC, ICICI) own NPCI.',
         power: 'Act as "Delegated Regulators" over fintech layer—must audit TPAP security. Large banks wield influence on NPCI board. Bear fraud liability per NPCI rules',
@@ -62,13 +62,15 @@ const ActorNetwork = () => {
         name: 'Fintech (TPAPs)', 
         x: 550, 
         y: 270, 
-        color: '#3b82f6',
+        color: '#0ea5e9',
         role: 'Application Layer & Innovation Drivers',
         desc: 'Third-Party App Providers (PhonePe, Google Pay, Paytom) build consumer interfaces. PhonePe + Google Pay control 86%+ of transaction volume, creating structural monopoly concern.',
         power: 'User engagement dominance gives bargaining power. Drive feature requests. Collect rich behavioral data. Add value-added services (BNPL, credit lines)',
         connections: ['Integrate via PSP bank APIs', 'Must comply with 30% volume cap (extended 2 years)', 'Cross-sell financial products'],
         keyInsight: 'Paradox: open-source protocol enables concentrated duopoly at application layer, requiring continuous regulatory intervention'
-      },
+      }
+    ],
+    human: [
       { 
         id: 'merchants', 
         name: 'Merchants', 
@@ -262,7 +264,7 @@ const ActorNetwork = () => {
     { from: 'credit', to: 'users', strength: 2, type: 'value', label: 'Credit access' }
   ];
 
-  const allActors = [...actors.human, ...actors.nonHuman, ...actors.peripheral];
+  const allActors = [...actors.institutions, ...actors.human, ...actors.nonHuman, ...actors.peripheral];
 
   const getActorById = (id) => allActors.find(a => a.id === id);
 
@@ -419,6 +421,10 @@ const ActorNetwork = () => {
             {/* Legend */}
             <div className="absolute bottom-4 left-4 bg-white/95 p-3 rounded-lg shadow-md text-sm">
               <div className="font-semibold mb-2">Actor Types</div>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#0ea5e9' }}></div>
+                <span>Institutional Actors</span>
+              </div>
               <div className="flex items-center gap-2 mb-1">
                 <div className="w-4 h-4 rounded-full bg-blue-500"></div>
                 <span>Human Actors</span>
@@ -707,7 +713,7 @@ const ActorNetwork = () => {
               <div>
                 <h4 className="font-semibold mb-2 text-slate-200">Heterogeneous Network</h4>
                 <p className="text-slate-300">
-                  UPI demonstrates symmetrical treatment of human (users, merchants, banks) and non-human actors (protocols, QR codes, algorithms). Both exercise agency in shaping network outcomes.
+                  UPI demonstrates symmetrical treatment of institutional (government, RBI, NPCI, banks), human (users, merchants), and non-human actors (protocols, QR codes, algorithms). Each cohort exercises agency in shaping network outcomes.
                 </p>
               </div>
               <div>
